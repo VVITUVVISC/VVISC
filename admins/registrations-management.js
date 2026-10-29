@@ -131,24 +131,24 @@ function renderTable() {
         return `
             <tr data-id="${CMS.escapeHtml(r.id)}">
                 <td>
-                    <strong style="color:var(--text-color, #fff); display:block;">${CMS.escapeHtml(r.name || "Anonymous")}</strong>
+                    <strong style="color:inherit; display:block; font-weight:700;">${CMS.escapeHtml(r.name || "Anonymous")}</strong>
                 </td>
                 <td>
-                    <code style="font-family:'JetBrains Mono', monospace; font-size:0.8rem; background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">${CMS.escapeHtml(r.rollNumber || "N/A")}</code>
+                    <code class="roll-code">${CMS.escapeHtml(r.rollNumber || "N/A")}</code>
                 </td>
                 <td>
                     <div style="font-size:0.82rem;">
-                        <a href="mailto:${CMS.escapeHtml(r.email)}" style="color:var(--accent-color, #6366f1); text-decoration:none;">${CMS.escapeHtml(r.email || "")}</a>
-                        ${r.phone ? `<div style="color:var(--text-muted, #94a3b8); margin-top:2px;">📞 ${CMS.escapeHtml(r.phone)}</div>` : ''}
+                        <a href="mailto:${CMS.escapeHtml(r.email)}" style="color:var(--accent-color, #C76B3C); text-decoration:none; font-weight:600;">${CMS.escapeHtml(r.email || "")}</a>
+                        ${r.phone ? `<div style="color:var(--text-dim, #64748B); margin-top:2px;">📞 ${CMS.escapeHtml(r.phone)}</div>` : ''}
                     </div>
                 </td>
                 <td>
                     <span style="font-size:0.85rem;">${CMS.escapeHtml(r.department || "General")} &bull; ${CMS.escapeHtml(r.yearOfStudy || "")}</span>
                 </td>
                 <td>
-                    <span style="font-weight:600; font-size:0.85rem;">${CMS.escapeHtml(eventName)}</span>
+                    <span style="font-weight:600; font-size:0.85rem; color:var(--text-color);">${CMS.escapeHtml(eventName)}</span>
                 </td>
-                <td style="color:var(--text-muted, #94a3b8); font-size:0.8rem;">
+                <td style="color:var(--text-dim, #64748B); font-size:0.8rem;">
                     ${CMS.escapeHtml(dateStr)}
                 </td>
                 <td>
