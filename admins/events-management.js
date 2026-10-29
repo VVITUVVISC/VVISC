@@ -625,7 +625,7 @@ function renderEventsTable() {
                     <img src="${getAdminImgSrc(poster)}" alt="Poster" style="width:52px; height:52px; border-radius:8px; object-fit:cover; border:1px solid var(--border-color);" onerror="this.onerror=null; this.src='../assets/nodp.png';">
                 </td>
                 <td>
-                    <div style="font-weight:700; color:var(--text); line-height:1.3;">${escapeHtml(e.title)}</div>
+                    <div class="event-row-title" style="font-weight:700; line-height:1.3;">${escapeHtml(e.title)}</div>
                     <div style="font-size:0.76rem; color:var(--accent-color); font-weight:600; margin-top:2px;">
                         ${escapeHtml(e.category || "HACKATHON")} ${e.venue ? `&bull; 📍 ${escapeHtml(e.venue)}` : ""}
                     </div>
