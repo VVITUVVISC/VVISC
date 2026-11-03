@@ -68,7 +68,7 @@ async function loadSettingsData() {
         mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.345!2d80.523!3d16.354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
         linkedin: "https://linkedin.com/company/vvisc",
         instagram: "https://instagram.com/vvisc_vvit",
-        github: "https://github.com/vvisc",
+        github: "https://github.com/VVITUVVISC",
         youtube: "https://youtube.com/@vvisc",
         whatsapp: "",
         defaultSeoTitle: "VVISC Technical Club - VVIT IUCEE Chapter",

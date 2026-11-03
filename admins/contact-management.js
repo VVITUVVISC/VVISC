@@ -25,7 +25,7 @@ async function loadContactData() {
         officeHours: "Monday - Saturday: 9:00 AM - 5:00 PM",
         mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.345!2d80.523!3d16.354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
         socialLinkedin: "https://linkedin.com",
-        socialGithub: "https://github.com",
+        socialGithub: "https://github.com/VVITUVVISC",
         socialInstagram: "https://instagram.com",
         socialTwitter: "https://twitter.com"
     });
@@ -38,7 +38,7 @@ async function loadContactData() {
     document.getElementById("contactOfficeHours").value = data.officeHours || "";
     document.getElementById("contactMapEmbedUrl").value = data.mapEmbedUrl || "";
     document.getElementById("socialLinkedin").value = data.socialLinkedin || "";
-    document.getElementById("socialGithub").value = data.socialGithub || "";
+    document.getElementById("socialGithub").value = (data.socialGithub && data.socialGithub !== "https://github.com") ? data.socialGithub : "https://github.com/VVITUVVISC";
     document.getElementById("socialInstagram").value = data.socialInstagram || "";
     document.getElementById("socialTwitter").value = data.socialTwitter || "";
 }

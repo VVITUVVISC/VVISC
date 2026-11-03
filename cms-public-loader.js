@@ -20,6 +20,26 @@ function escapeAttr(str) {
         .replace(/>/g, "&gt;");
 }
 
+// Global Handler: Ensures whenever any user clicks on a GitHub icon, picture, or link across all pages,
+// it consistently opens the official VVISC GitHub organization: https://github.com/VVITUVVISC
+document.addEventListener("click", (e) => {
+    const gitLink = e.target.closest("a");
+    if (gitLink) {
+        const hasGitIcon = gitLink.querySelector(".fa-github, [data-icon='github']") || 
+                           (gitLink.getAttribute("aria-label") && gitLink.getAttribute("aria-label").toLowerCase().includes("github")) ||
+                           gitLink.classList.contains("github") ||
+                           (gitLink.href && gitLink.href.includes("github.com"));
+        if (hasGitIcon) {
+            const rawHref = (gitLink.getAttribute("href") || "").trim();
+            if (!rawHref || rawHref === "#" || rawHref === "https://github.com" || rawHref === "https://github.com/" || rawHref === "https://github.com/vvisc" || rawHref === "https://github.com/vvisc/") {
+                gitLink.href = "https://github.com/VVITUVVISC";
+                gitLink.target = "_blank";
+                gitLink.rel = "noopener noreferrer";
+            }
+        }
+    }
+}, true);
+
 document.addEventListener("DOMContentLoaded", async () => {
     if (typeof db === "undefined") {
         console.warn("Firestore 'db' not initialized. Skipping public CMS loader.");
@@ -144,16 +164,26 @@ async function loadGlobalSettings() {
 
         // Social Media Links
         if (settings.linkedin) {
-            document.querySelectorAll("a[href*='linkedin.com'], a[aria-label='LinkedIn']").forEach(a => a.href = settings.linkedin);
+            document.querySelectorAll("a[href*='linkedin.com'], a[aria-label*='LinkedIn']").forEach(a => a.href = settings.linkedin);
         }
         if (settings.instagram) {
-            document.querySelectorAll("a[href*='instagram.com'], a[aria-label='Instagram']").forEach(a => a.href = settings.instagram);
+            document.querySelectorAll("a[href*='instagram.com'], a[aria-label*='Instagram']").forEach(a => a.href = settings.instagram);
         }
-        if (settings.github) {
-            document.querySelectorAll("a[href*='github.com'], a[aria-label='GitHub']").forEach(a => a.href = settings.github);
-        }
+        const githubOrgUrl = (settings.github && settings.github.trim() && settings.github !== "https://github.com" && settings.github !== "https://github.com/" && settings.github !== "https://github.com/vvisc" && settings.github !== "#") ? settings.github.trim() : "https://github.com/VVITUVVISC";
+        document.querySelectorAll("a[href*='github.com'], a[aria-label*='GitHub'], a.social-circle.github, a.vvisc-social-item-link[aria-label*='GitHub']").forEach(a => {
+            const currHref = (a.getAttribute("href") || "").trim();
+            if (a.classList.contains('vvisc-social-item-link') || 
+                a.classList.contains('social-circle') || 
+                (a.getAttribute('aria-label') && a.getAttribute('aria-label').toLowerCase().includes('github')) || 
+                currHref === 'https://github.com/' || 
+                currHref === 'https://github.com' || 
+                currHref === 'https://github.com/vvisc' || 
+                currHref === '#') {
+                a.href = githubOrgUrl;
+            }
+        });
         if (settings.youtube) {
-            document.querySelectorAll("a[href*='youtube.com'], a[aria-label='YouTube']").forEach(a => a.href = settings.youtube);
+            document.querySelectorAll("a[href*='youtube.com'], a[aria-label*='YouTube']").forEach(a => a.href = settings.youtube);
         }
     } catch (e) {
         console.warn("loadGlobalSettings error:", e);
@@ -2648,7 +2678,7 @@ function renderCouncilDOM(members, depts) {
                     <p>${escapeHtml(m.description || "")}</p>
                     <div class="role-buttons">
                         ${m.linkedin ? `<a href="${escapeHtml(m.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : `<a href="#" target="_blank" rel="noopener">LinkedIn</a>`}
-                        ${m.github ? `<a href="${escapeHtml(m.github)}" target="_blank" rel="noopener">GitHub</a>` : `<a href="#" target="_blank" rel="noopener">GitHub</a>`}
+                        ${m.github && m.github !== "#" ? `<a href="${escapeHtml(m.github)}" target="_blank" rel="noopener">GitHub</a>` : `<a href="https://github.com/VVITUVVISC" target="_blank" rel="noopener">GitHub</a>`}
                     </div>
                 `;
                 roleGrid.appendChild(card);
@@ -4080,7 +4110,7 @@ async function loadProjectsPageContent() {
                     status: "Completed",
                     leadName: "K. Rajesh",
                     teamMembers: "K. Rajesh, V. Karthik, S. Meghana",
-                    githubUrl: "https://github.com/",
+                    githubUrl: "https://github.com/VVITUVVISC",
                     liveDemoUrl: "",
                     image: "assets/nodp.png",
                     active: true
@@ -4095,7 +4125,7 @@ async function loadProjectsPageContent() {
                     status: "In Progress",
                     leadName: "P. Sai",
                     teamMembers: "P. Sai, N. Tarun, D. Harika",
-                    githubUrl: "https://github.com/",
+                    githubUrl: "https://github.com/VVITUVVISC",
                     liveDemoUrl: "https://vvisc-iucee.web.app",
                     image: "assets/nodp.png",
                     active: true
@@ -4110,7 +4140,7 @@ async function loadProjectsPageContent() {
                     status: "Completed",
                     leadName: "M. Teja",
                     teamMembers: "M. Teja, B. Sravani, J. Aditya",
-                    githubUrl: "https://github.com/",
+                    githubUrl: "https://github.com/VVITUVVISC",
                     liveDemoUrl: "",
                     image: "assets/nodp.png",
                     active: true
@@ -4125,7 +4155,7 @@ async function loadProjectsPageContent() {
                     status: "In Progress",
                     leadName: "V. Ananya",
                     teamMembers: "V. Ananya, L. Nitin, R. Praveen",
-                    githubUrl: "https://github.com/",
+                    githubUrl: "https://github.com/VVITUVVISC",
                     liveDemoUrl: "https://vvisc-iucee.web.app",
                     image: "assets/nodp.png",
                     active: true
@@ -4140,7 +4170,7 @@ async function loadProjectsPageContent() {
                     status: "Upcoming",
                     leadName: "B. Tharun",
                     teamMembers: "B. Tharun, G. Kavya",
-                    githubUrl: "https://github.com/",
+                    githubUrl: "https://github.com/VVITUVVISC",
                     liveDemoUrl: "",
                     image: "assets/nodp.png",
                     active: true
